@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CollapsingToolBar</string>
+    <string name="example_list">Example List</string>
+    <string name="collapsing_tool_bar">Collapsing Toolbar</string>
+    <string name="enterAlwaysCollapsed">EnterAlwaysCollapsed</string>
+    <string name="enterAlways">enterAlways</string>
+    <string name="enterAlways_EnterAlwaysCollapsed">enterAlways_EnterAlwaysCollapsed</string>
+    <string name="exitUntilCollapsed">exitUntilCollapsed</string>
 </resources>

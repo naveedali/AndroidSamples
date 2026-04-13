@@ -1,17 +1,19 @@
 package naveed.sample.collapsingtoolbar
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.appbar.AppBarLayout
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var recyclerView:RecyclerView
-    lateinit var collapsingToolbar:AppBarLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,30 +24,22 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        collapsingToolbar = findViewById(R.id.appBar)
         recyclerView = findViewById(R.id.recyclerView)
-
         // Set up RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = MyAdapter() // Replace with your adapter
-
-//        collapsingToolbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-//            // Calculate the percentage of the AppBarLayout that is visible
-//            val percentage = Math.abs(verticalOffset).toFloat() / appBarLayout.totalScrollRange.toFloat() * 100
-//
-//            // Update UI based on the percentage (e.g., fade in/out toolbar title)
-//            // ...
-//        })
-
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-               if (dy>0){
-                   collapsingToolbar.setExpanded(false,true)
-               }else collapsingToolbar.setExpanded(true,true)
+        recyclerView.adapter = ExampleListAdapter({
+            when(it){
+                R.string.collapsing_tool_bar->{
+                    startActivity(Intent(this,ActionBarCollapsingToolbarActivity::class.java).apply {
+                        putExtras(bundleOf("id" to it))
+                    })
+                }
+                else -> {
+                    startActivity(Intent(this,ActionBarCollapsingToolbarActivity::class.java).apply {
+                        putExtras(bundleOf("id" to it))
+                    })
+                }
             }
-        })
-        // Optional: Set title for collapsing toolbar
-        //collapsingToolbar.title = "Your Title"
+        }) // Replace with your adapter
     }
 }

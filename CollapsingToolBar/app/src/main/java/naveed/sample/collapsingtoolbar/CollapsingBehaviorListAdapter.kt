@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 
-class MyAdapter : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+class CollapsingBehaviorListAdapter : RecyclerView.Adapter<CollapsingBehaviorListAdapter.ViewHolder>() {
     var imageList: List<Int> = mutableListOf()
     init {
+
+
         imageList = listOf(
             R.drawable.ic_launcher_foreground,
             R.drawable.ic_launcher_foreground,
@@ -29,6 +31,8 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
         )
 
     }
+
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
     }
