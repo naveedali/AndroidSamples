@@ -1,0 +1,78 @@
+package com.naveedali.uiwithcompose.navigation
+
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import com.naveedali.uiwithcompose.screens.LearningHomeScreen
+import com.naveedali.uiwithcompose.screens.ScaffoldDemoScreen
+
+// ─────────────────────────────────────────────────────────────────────────────
+// AppNavGraph — the navigation map for the whole app.
+//
+// NavHost is the container that swaps composables in and out based on the
+// current destination. Think of it as the frame inside which each "screen"
+// is rendered.
+//
+// Key parameters:
+//   navController     — the object that drives navigation (go to, go back, etc.)
+//   startDestination  — the route shown when the app first opens
+//
+// Each `composable(route) { ... }` block declares one screen destination.
+// The lambda receives a NavBackStackEntry (ignored here with `_`) which can
+// carry navigation arguments when needed.
+//
+// HOW TO ADD A NEW SCREEN:
+//   1. Add its object to Screen.kt
+//   2. Add a composable { } block below, passing the right callbacks
+//   3. Map its index in the `onItemClick` when expression inside Home
+// ─────────────────────────────────────────────────────────────────────────────
+@Composable
+fun AppNavGraph(navController: NavHostController) {
+
+    NavHost(
+        navController = navController,
+        startDestination = Screen.Home.route
+    ) {
+
+        // ── Home screen ───────────────────────────────────────────────────────
+        composable(route = Screen.Home.route) {
+            LearningHomeScreen(
+                // onItemClick delivers the 0-based index of the tapped row.
+                // Map each index to the matching Screen destination.
+                onItemClick = { index ->
+                    when (index) {
+                        0 -> navController.navigate(Screen.ScaffoldDemo.route)
+                        // Uncomment as each screen is implemented:
+                        // 1  -> navController.navigate(Screen.Labels.route)
+                        // 2  -> navController.navigate(Screen.Buttons.route)
+                        // 3  -> navController.navigate(Screen.ImageViews.route)
+                        // 4  -> navController.navigate(Screen.TextFields.route)
+                        // 5  -> navController.navigate(Screen.Toggles.route)
+                        // 6  -> navController.navigate(Screen.RatingBar.route)
+                        // 7  -> navController.navigate(Screen.Dialogs.route)
+                        // 8  -> navController.navigate(Screen.ProgressIndicators.route)
+                        // 9  -> navController.navigate(Screen.Cards.route)
+                        // 10 -> navController.navigate(Screen.Snackbars.route)
+                        // 11 -> navController.navigate(Screen.HorizontalList.route)
+                        // 12 -> navController.navigate(Screen.VerticalList.route)
+                        // 13 -> navController.navigate(Screen.Grid.route)
+                        // 14 -> navController.navigate(Screen.LoginPage.route)
+                        // 15 -> navController.navigate(Screen.BottomNavigation.route)
+                        // 16 -> navController.navigate(Screen.Animations.route)
+                        else -> { /* screen not yet implemented — do nothing */ }
+                    }
+                }
+            )
+        }
+
+        // ── Scaffold demo screen ──────────────────────────────────────────────
+        composable(route = Screen.ScaffoldDemo.route) {
+            ScaffoldDemoScreen(
+                // navController.popBackStack() removes the current destination
+                // from the back stack, effectively going back to the previous screen.
+                onBack = { navController.popBackStack() }
+            )
+        }
+    }
+}
