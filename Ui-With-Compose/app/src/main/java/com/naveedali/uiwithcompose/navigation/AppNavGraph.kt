@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.naveedali.uiwithcompose.screens.LabelsScreen
 import com.naveedali.uiwithcompose.screens.LearningHomeScreen
 import com.naveedali.uiwithcompose.screens.ScaffoldDemoScreen
 
@@ -44,9 +45,9 @@ fun AppNavGraph(navController: NavHostController) {
                     when (index) {
                         0 -> navController.navigate(Screen.ScaffoldDemo.route)
                         // Uncomment as each screen is implemented:
-                        // 1  -> navController.navigate(Screen.Labels.route)
-                        // 2  -> navController.navigate(Screen.Buttons.route)
-                        // 3  -> navController.navigate(Screen.ImageViews.route)
+                        1  -> navController.navigate(Screen.Labels.route)
+                        2  -> navController.navigate(Screen.Buttons.route)
+                        3  -> navController.navigate(Screen.ImageViews.route)
                         // 4  -> navController.navigate(Screen.TextFields.route)
                         // 5  -> navController.navigate(Screen.Toggles.route)
                         // 6  -> navController.navigate(Screen.RatingBar.route)
@@ -63,6 +64,13 @@ fun AppNavGraph(navController: NavHostController) {
                         else -> { /* screen not yet implemented — do nothing */ }
                     }
                 }
+            )
+        }
+
+        // ── Labels screen ─────────────────────────────────────────────────────
+        composable(route = Screen.Labels.route) {
+            LabelsScreen(
+                onBack = { navController.popBackStack() }
             )
         }
 

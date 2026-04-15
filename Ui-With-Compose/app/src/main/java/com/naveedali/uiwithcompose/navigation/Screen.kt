@@ -27,9 +27,9 @@ sealed class Screen(val route: String) {
     object ScaffoldDemo : Screen("scaffold_demo")
 
     // ── Future screens (add as you implement them) ────────────────────────────
-    // object Labels           : Screen("labels")
-    // object Buttons          : Screen("buttons")
-    // object ImageViews       : Screen("image_views")
+     object Labels           : Screen("labels")
+     object Buttons          : Screen("buttons")
+     object ImageViews       : Screen("image_views")
     // object TextFields       : Screen("text_fields")
     // object Toggles          : Screen("toggles")
     // object RatingBar        : Screen("rating_bar")
