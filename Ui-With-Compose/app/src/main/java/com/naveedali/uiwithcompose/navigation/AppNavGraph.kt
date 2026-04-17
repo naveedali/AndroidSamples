@@ -8,6 +8,7 @@ import com.naveedali.uiwithcompose.screens.ButtonsScreen
 import com.naveedali.uiwithcompose.screens.CardsScreen
 import com.naveedali.uiwithcompose.screens.DialogsScreen
 import com.naveedali.uiwithcompose.screens.TogglesScreen
+import com.naveedali.uiwithcompose.screens.HorizontalListScreen
 import com.naveedali.uiwithcompose.screens.ImageViewsScreen
 import com.naveedali.uiwithcompose.screens.LabelsScreen
 import com.naveedali.uiwithcompose.screens.LearningHomeScreen
@@ -64,7 +65,7 @@ fun AppNavGraph(navController: NavHostController) {
                         8  -> navController.navigate(Screen.ProgressIndicators.route)
                         9  -> navController.navigate(Screen.Cards.route)
                         10 -> navController.navigate(Screen.Snackbars.route)
-                        // 11 -> navController.navigate(Screen.HorizontalList.route)
+                        11 -> navController.navigate(Screen.HorizontalList.route)
                         // 12 -> navController.navigate(Screen.VerticalList.route)
                         // 13 -> navController.navigate(Screen.Grid.route)
                         // 14 -> navController.navigate(Screen.LoginPage.route)
@@ -135,6 +136,13 @@ fun AppNavGraph(navController: NavHostController) {
         // ── Snackbars & Toasts screen ───────────────────────────────────────
         composable(route = Screen.Snackbars.route) {
             SnackbarsToastsScreen(
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        // ── Horizontal List screen ──────────────────────────────────────────
+        composable(route = Screen.HorizontalList.route) {
+            HorizontalListScreen(
                 onBack = { navController.popBackStack() }
             )
         }
