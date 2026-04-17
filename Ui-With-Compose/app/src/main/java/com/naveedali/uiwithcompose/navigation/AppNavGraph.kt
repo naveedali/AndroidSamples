@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import com.naveedali.uiwithcompose.screens.LabelsScreen
 import com.naveedali.uiwithcompose.screens.LearningHomeScreen
 import com.naveedali.uiwithcompose.screens.ScaffoldDemoScreen
+import com.naveedali.uiwithcompose.screens.TextFieldsScreen
 
 // ─────────────────────────────────────────────────────────────────────────────
 // AppNavGraph — the navigation map for the whole app.
@@ -48,7 +49,7 @@ fun AppNavGraph(navController: NavHostController) {
                         1  -> navController.navigate(Screen.Labels.route)
                         2  -> navController.navigate(Screen.Buttons.route)
                         3  -> navController.navigate(Screen.ImageViews.route)
-                        // 4  -> navController.navigate(Screen.TextFields.route)
+                        4  -> navController.navigate(Screen.TextFields.route)
                         // 5  -> navController.navigate(Screen.Toggles.route)
                         // 6  -> navController.navigate(Screen.RatingBar.route)
                         // 7  -> navController.navigate(Screen.Dialogs.route)
@@ -64,6 +65,13 @@ fun AppNavGraph(navController: NavHostController) {
                         else -> { /* screen not yet implemented — do nothing */ }
                     }
                 }
+            )
+        }
+
+        // ── TextFields screen ─────────────────────────────────────────────────
+        composable(route = Screen.TextFields.route) {
+            TextFieldsScreen(
+                onBack = { navController.popBackStack() }
             )
         }
 

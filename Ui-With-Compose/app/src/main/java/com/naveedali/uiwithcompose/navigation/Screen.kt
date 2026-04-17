@@ -30,7 +30,7 @@ sealed class Screen(val route: String) {
      object Labels           : Screen("labels")
      object Buttons          : Screen("buttons")
      object ImageViews       : Screen("image_views")
-    // object TextFields       : Screen("text_fields")
+    object TextFields       : Screen("text_fields")
     // object Toggles          : Screen("toggles")
     // object RatingBar        : Screen("rating_bar")
     // object Dialogs          : Screen("dialogs")
