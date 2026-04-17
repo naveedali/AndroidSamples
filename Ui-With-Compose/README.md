@@ -7,9 +7,9 @@ A hands-on learning sample for **Jetpack Compose** — Android's modern, declara
 ## Screenshots
 
 <p align="center">
-  <img src="screenshots/home_screen_top.png" width="270" alt="Home screen — top"/>
+  <img src="screenshots/home_screen_1.png" width="270" alt="Home screen — top"/>
   &nbsp;&nbsp;&nbsp;
-  <img src="screenshots/home_screen_bottom.png" width="270" alt="Home screen — bottom"/>
+  <img src="screenshots/home_screen_2.png" width="270" alt="Home screen — bottom"/>
 </p>
 <p align="center">
   <em>Home screen — the full catalogue of UI practice topics</em>
