@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.naveedali.uiwithcompose.screens.ImageViewsScreen
 import com.naveedali.uiwithcompose.screens.LabelsScreen
 import com.naveedali.uiwithcompose.screens.LearningHomeScreen
 import com.naveedali.uiwithcompose.screens.ScaffoldDemoScreen
@@ -78,6 +79,13 @@ fun AppNavGraph(navController: NavHostController) {
         // ── Labels screen ─────────────────────────────────────────────────────
         composable(route = Screen.Labels.route) {
             LabelsScreen(
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        // ── Image Views screen ────────────────────────────────────────────────
+        composable(route = Screen.ImageViews.route) {
+            ImageViewsScreen(
                 onBack = { navController.popBackStack() }
             )
         }

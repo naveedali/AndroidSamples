@@ -54,6 +54,8 @@ dependencies {
     // Extended icon pack — required for Visibility, VisibilityOff, and other
     // icons not included in the default Icons.Default set.
     implementation(libs.androidx.compose.material.icons.extended)
+    // Coil — async image loading from URLs, with placeholder / error / crossfade support.
+    implementation(libs.coil.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

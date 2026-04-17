@@ -9,6 +9,7 @@ lifecycleRuntimeKtx = "2.10.0"
 activityCompose = "1.12.4"
 composeBom = "2024.09.00"
 navigationCompose = "2.8.4"
+coil = "2.7.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -29,6 +30,8 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 # Extended icon set — includes Visibility, VisibilityOff, and ~1,000+ additional icons.
 # Version is managed by the Compose BOM above, so no version.ref needed here.
 androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+# Coil — image loading library with first-class Compose support (AsyncImage).
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
