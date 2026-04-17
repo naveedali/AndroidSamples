@@ -34,7 +34,7 @@ sealed class Screen(val route: String) {
      object Toggles          : Screen("toggles")
      object RatingBar        : Screen("rating_bar")
      object Dialogs          : Screen("dialogs")
-    // object ProgressIndicators : Screen("progress_indicators")
+     object ProgressIndicators : Screen("progress_indicators")
     // object Cards            : Screen("cards")
     // object Snackbars        : Screen("snackbars")
     // object HorizontalList   : Screen("horizontal_list")
