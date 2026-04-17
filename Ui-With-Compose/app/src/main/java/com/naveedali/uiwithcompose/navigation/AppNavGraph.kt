@@ -14,6 +14,7 @@ import com.naveedali.uiwithcompose.screens.LearningHomeScreen
 import com.naveedali.uiwithcompose.screens.ProgressIndicatorsScreen
 import com.naveedali.uiwithcompose.screens.RatingBarScreen
 import com.naveedali.uiwithcompose.screens.ScaffoldDemoScreen
+import com.naveedali.uiwithcompose.screens.SnackbarsToastsScreen
 import com.naveedali.uiwithcompose.screens.TextFieldsScreen
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -62,7 +63,7 @@ fun AppNavGraph(navController: NavHostController) {
                         7  -> navController.navigate(Screen.Dialogs.route)
                         8  -> navController.navigate(Screen.ProgressIndicators.route)
                         9  -> navController.navigate(Screen.Cards.route)
-                        // 10 -> navController.navigate(Screen.Snackbars.route)
+                        10 -> navController.navigate(Screen.Snackbars.route)
                         // 11 -> navController.navigate(Screen.HorizontalList.route)
                         // 12 -> navController.navigate(Screen.VerticalList.route)
                         // 13 -> navController.navigate(Screen.Grid.route)
@@ -127,6 +128,13 @@ fun AppNavGraph(navController: NavHostController) {
         // ── Cards screen ────────────────────────────────────────────────────
         composable(route = Screen.Cards.route) {
             CardsScreen(
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        // ── Snackbars & Toasts screen ───────────────────────────────────────
+        composable(route = Screen.Snackbars.route) {
+            SnackbarsToastsScreen(
                 onBack = { navController.popBackStack() }
             )
         }
