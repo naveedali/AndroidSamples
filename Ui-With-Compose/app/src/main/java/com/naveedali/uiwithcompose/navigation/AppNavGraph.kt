@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import com.naveedali.uiwithcompose.screens.ButtonsScreen
 import com.naveedali.uiwithcompose.screens.CardsScreen
 import com.naveedali.uiwithcompose.screens.DialogsScreen
+import com.naveedali.uiwithcompose.screens.GridScreen
 import com.naveedali.uiwithcompose.screens.TogglesScreen
 import com.naveedali.uiwithcompose.screens.HorizontalListScreen
 import com.naveedali.uiwithcompose.screens.ImageViewsScreen
@@ -68,7 +69,7 @@ fun AppNavGraph(navController: NavHostController) {
                         10 -> navController.navigate(Screen.Snackbars.route)
                         11 -> navController.navigate(Screen.HorizontalList.route)
                         12 -> navController.navigate(Screen.VerticalList.route)
-                        // 13 -> navController.navigate(Screen.Grid.route)
+                        13 -> navController.navigate(Screen.Grid.route)
                         // 14 -> navController.navigate(Screen.LoginPage.route)
                         // 15 -> navController.navigate(Screen.BottomNavigation.route)
                         // 16 -> navController.navigate(Screen.Animations.route)
@@ -151,6 +152,13 @@ fun AppNavGraph(navController: NavHostController) {
         // ── Vertical List screen ────────────────────────────────────────────
         composable(route = Screen.VerticalList.route) {
             VerticalListScreen(
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        // ── Grid screen ─────────────────────────────────────────────────────
+        composable(route = Screen.Grid.route) {
+            GridScreen(
                 onBack = { navController.popBackStack() }
             )
         }

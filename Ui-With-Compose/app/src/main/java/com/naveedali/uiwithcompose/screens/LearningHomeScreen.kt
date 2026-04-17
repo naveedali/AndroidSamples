@@ -80,7 +80,7 @@ fun LearningHomeScreen(
             // Header — rendered once at the top of the list.
             item {
                 Text(
-                    text = "Compose UI Practice",
+                    text = "Compose UI Basic Blocks",
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(vertical = 16.dp)
