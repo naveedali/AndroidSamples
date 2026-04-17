@@ -44,10 +44,10 @@ val practiceScreens: List<Pair<String, String>> = listOf(
     "Snackbars & Toasts"                  to "SnackbarHost, SnackbarResult, coroutine scope",
     "Horizontal List"                     to "LazyRow, item keys, content padding",
     "Vertical List"                       to "LazyColumn, stickyHeader, pull-to-refresh",
-    "Grid"                                to "LazyVerticalGrid, LazyHorizontalGrid, adaptive columns",
-    "Login Page"                          to "Form layout combining TextField, Button, validation",
-    "Bottom Navigation"                   to "NavigationBar, NavHost, back-stack management",
-    "Animations"                          to "AnimatedVisibility, animate*AsState, Transition API"
+    "Grid"                                to "LazyVerticalGrid, LazyHorizontalGrid, adaptive columns"
+    //"Login Page"                          to "Form layout combining TextField, Button, validation",
+    //"Bottom Navigation"                   to "NavigationBar, NavHost, back-stack management",
+    //"Animations"                          to "AnimatedVisibility, animate*AsState, Transition API"
 )
 
 // ─────────────────────────────────────────────────────────────────────────────
