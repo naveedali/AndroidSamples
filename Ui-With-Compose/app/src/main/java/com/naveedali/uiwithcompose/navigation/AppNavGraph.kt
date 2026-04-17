@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.naveedali.uiwithcompose.screens.ButtonsScreen
+import com.naveedali.uiwithcompose.screens.TogglesScreen
 import com.naveedali.uiwithcompose.screens.ImageViewsScreen
 import com.naveedali.uiwithcompose.screens.LabelsScreen
 import com.naveedali.uiwithcompose.screens.LearningHomeScreen
@@ -52,7 +53,7 @@ fun AppNavGraph(navController: NavHostController) {
                         2  -> navController.navigate(Screen.Buttons.route)
                         3  -> navController.navigate(Screen.ImageViews.route)
                         4  -> navController.navigate(Screen.TextFields.route)
-                        // 5  -> navController.navigate(Screen.Toggles.route)
+                        5  -> navController.navigate(Screen.Toggles.route)
                         // 6  -> navController.navigate(Screen.RatingBar.route)
                         // 7  -> navController.navigate(Screen.Dialogs.route)
                         // 8  -> navController.navigate(Screen.ProgressIndicators.route)
@@ -80,6 +81,13 @@ fun AppNavGraph(navController: NavHostController) {
         // ── Labels screen ─────────────────────────────────────────────────────
         composable(route = Screen.Labels.route) {
             LabelsScreen(
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        // ── Toggles screen ────────────────────────────────────────────────────
+        composable(route = Screen.Toggles.route) {
+            TogglesScreen(
                 onBack = { navController.popBackStack() }
             )
         }

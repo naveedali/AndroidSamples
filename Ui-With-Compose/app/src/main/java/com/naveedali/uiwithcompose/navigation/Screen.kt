@@ -31,7 +31,7 @@ sealed class Screen(val route: String) {
      object Buttons          : Screen("buttons")
      object ImageViews       : Screen("image_views")
     object TextFields       : Screen("text_fields")
-    // object Toggles          : Screen("toggles")
+     object Toggles          : Screen("toggles")
     // object RatingBar        : Screen("rating_bar")
     // object Dialogs          : Screen("dialogs")
     // object ProgressIndicators : Screen("progress_indicators")
