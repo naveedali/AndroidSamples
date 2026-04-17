@@ -19,6 +19,11 @@ enum class DialogDemoType {
     DIALOG_CUSTOM_CARD,    // Custom surface and free-form content
     DIALOG_FORM,           // Small form-like dialog with local input state
     DIALOG_PROGRESS,       // Loading/progress dialog that blocks dismissal
+
+    // ── BottomSheet patterns ────────────────────────────────────────────────
+    SHEET_BASIC,           // Introductory modal bottom sheet
+    SHEET_ACTIONS,         // Action-sheet style list of quick actions
+    SHEET_CONFIRMATION,    // Confirmation flow presented as a bottom sheet
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -79,5 +84,25 @@ val dialogDemos: List<DialogDemo> = listOf(
         title = "Dialog — Loading / Blocking Progress",
         description = "A loading dialog is useful when the current action must finish before " +
                 "the user can continue. `DialogProperties` can disable outside-click dismissal."
+    ),
+
+    // ── BottomSheet patterns ────────────────────────────────────────────────
+    DialogDemo(
+        type = DialogDemoType.SHEET_BASIC,
+        title = "Bottom Sheet — Basic",
+        description = "A ModalBottomSheet slides up from the bottom and is great for " +
+                "supplementary content that feels lighter than a full dialog."
+    ),
+    DialogDemo(
+        type = DialogDemoType.SHEET_ACTIONS,
+        title = "Bottom Sheet — Action Sheet",
+        description = "Bottom sheets often work well as mobile-friendly action menus. " +
+                "This pattern is ideal for share, archive, duplicate, or move actions."
+    ),
+    DialogDemo(
+        type = DialogDemoType.SHEET_CONFIRMATION,
+        title = "Bottom Sheet — Confirmation",
+        description = "Some apps present confirmations in a bottom sheet instead of an alert. " +
+                "This gives more room for explanation and larger touch targets."
     ),
 )

@@ -30,6 +30,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
@@ -40,17 +41,13 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -64,7 +61,6 @@ import com.naveedali.uiwithcompose.model.DialogDemoType
 import com.naveedali.uiwithcompose.model.dialogDemos
 import com.naveedali.uiwithcompose.ui.theme.UiWithComposeTheme
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 // ─────────────────────────────────────────────────────────────────────────────
 // DialogsScreen
@@ -164,6 +160,9 @@ private fun DialogDemoCard(index: Int, demo: DialogDemo) {
                 DialogDemoType.DIALOG_CUSTOM_CARD -> CustomCardDialogDemo()
                 DialogDemoType.DIALOG_FORM -> FormDialogDemo()
                 DialogDemoType.DIALOG_PROGRESS -> ProgressDialogDemo()
+                DialogDemoType.SHEET_BASIC -> BasicBottomSheetDemo()
+                DialogDemoType.SHEET_ACTIONS -> ActionBottomSheetDemo()
+                DialogDemoType.SHEET_CONFIRMATION -> ConfirmationBottomSheetDemo()
             }
         }
     }
@@ -584,7 +583,6 @@ private fun FormDialogDemo() {
 // popup modal until the work finishes.
 @Composable
 private fun ProgressDialogDemo() {
-    val scope = rememberCoroutineScope()
     var showDialog by rememberSaveable { mutableStateOf(false) }
     var completedMessage by rememberSaveable { mutableStateOf("No upload in progress.") }
 
@@ -593,11 +591,6 @@ private fun ProgressDialogDemo() {
             onClick = {
                 showDialog = true
                 completedMessage = "Uploading report..."
-                scope.launch {
-                    delay(1800)
-                    showDialog = false
-                    completedMessage = "Upload complete. The dialog dismissed after the work finished."
-                }
             }
         ) {
             Text("Simulate upload")
@@ -608,6 +601,16 @@ private fun ProgressDialogDemo() {
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
+    }
+
+    if (showDialog) {
+        // Launch the fake work only while the dialog is visible.
+        // When the delay finishes we hide the dialog by updating state.
+        androidx.compose.runtime.LaunchedEffect(Unit) {
+            delay(1800)
+            showDialog = false
+            completedMessage = "Upload complete. The dialog dismissed after the work finished."
+        }
     }
 
     if (showDialog) {
@@ -644,6 +647,237 @@ private fun ProgressDialogDemo() {
                 }
             }
         }
+    }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ── BottomSheet demos ────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── 08 · Basic bottom sheet ──────────────────────────────────────────────────
+// ModalBottomSheet is ideal when content should feel attached to the current
+// screen rather than interrupt it with a center-screen alert dialog.
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun BasicBottomSheetDemo() {
+    var showSheet by rememberSaveable { mutableStateOf(false) }
+
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Button(onClick = { showSheet = true }) {
+            Text("Show bottom sheet")
+        }
+
+        Text(
+            text = "Use sheets for supporting content, quick details, or mobile action menus.",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
+
+    if (showSheet) {
+        ModalBottomSheet(
+            onDismissRequest = { showSheet = false }
+        ) {
+            SheetSection(
+                title = "Trip summary",
+                body = "Bottom sheets are useful for glanceable information that should stay connected " +
+                        "to the current screen context."
+            )
+
+            Text(
+                text = "Destination: Hunza Valley\nNights: 3\nGuests: 2",
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(horizontal = 24.dp)
+            )
+
+            Button(
+                onClick = { showSheet = false },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp)
+            ) {
+                Text("Done")
+            }
+        }
+    }
+}
+
+// ── 09 · Action-sheet bottom sheet ───────────────────────────────────────────
+// A bottom sheet can behave like iOS/Android style action sheets:
+//   • each row is a large, easy-to-tap action
+//   • destructive actions can be colored with the error palette
+//   • tapping one action usually dismisses the sheet immediately
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun ActionBottomSheetDemo() {
+    var showSheet by rememberSaveable { mutableStateOf(false) }
+    var lastAction by rememberSaveable { mutableStateOf("No action selected yet.") }
+
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        OutlinedButton(onClick = { showSheet = true }) {
+            Text("Open action sheet")
+        }
+
+        Text(
+            text = lastAction,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
+
+    if (showSheet) {
+        ModalBottomSheet(
+            onDismissRequest = { showSheet = false }
+        ) {
+            SheetSection(
+                title = "File actions",
+                body = "Action sheets are great for contextual options where a full dialog would feel heavy."
+            )
+
+            SheetActionRow(
+                label = "Share",
+                supportingText = "Send a copy to another app",
+                onClick = {
+                    lastAction = "Action selected: Share"
+                    showSheet = false
+                }
+            )
+            SheetActionRow(
+                label = "Duplicate",
+                supportingText = "Create a copy in the same folder",
+                onClick = {
+                    lastAction = "Action selected: Duplicate"
+                    showSheet = false
+                }
+            )
+            SheetActionRow(
+                label = "Delete",
+                supportingText = "Remove this file permanently",
+                textColor = MaterialTheme.colorScheme.error,
+                onClick = {
+                    lastAction = "Action selected: Delete"
+                    showSheet = false
+                }
+            )
+
+            Spacer(Modifier.height(16.dp))
+        }
+    }
+}
+
+// ── 10 · Confirmation bottom sheet ───────────────────────────────────────────
+// Confirmation sheets are useful when we want more breathing room than a small
+// alert dialog. They often include a richer explanation, larger buttons, and
+// stronger visual hierarchy.
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun ConfirmationBottomSheetDemo() {
+    var showSheet by rememberSaveable { mutableStateOf(false) }
+    var backupEnabled by rememberSaveable { mutableStateOf(true) }
+
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column {
+                Text("Automatic backups", style = MaterialTheme.typography.bodyMedium)
+                Text(
+                    text = if (backupEnabled) "Backups are enabled" else "Backups are paused",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            OutlinedButton(onClick = { showSheet = true }) {
+                Text(if (backupEnabled) "Pause" else "Resume")
+            }
+        }
+    }
+
+    if (showSheet) {
+        val nextValue = !backupEnabled
+
+        ModalBottomSheet(
+            onDismissRequest = { showSheet = false }
+        ) {
+            SheetSection(
+                title = if (nextValue) "Resume backups?" else "Pause backups?",
+                body = if (nextValue) {
+                    "Your project files will start syncing to cloud storage again in the background."
+                } else {
+                    "No new backups will be uploaded until you resume this setting."
+                }
+            )
+
+            Button(
+                onClick = {
+                    backupEnabled = nextValue
+                    showSheet = false
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp)
+            ) {
+                Text(if (nextValue) "Resume backups" else "Pause backups")
+            }
+
+            TextButton(
+                onClick = { showSheet = false },
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(top = 8.dp, bottom = 24.dp)
+            ) {
+                Text("Cancel")
+            }
+        }
+    }
+}
+
+@Composable
+private fun SheetSection(title: String, body: String) {
+    Column(
+        modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp),
+        verticalArrangement = Arrangement.spacedBy(6.dp)
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold
+        )
+        Text(
+            text = body,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
+}
+
+@Composable
+private fun SheetActionRow(
+    label: String,
+    supportingText: String,
+    onClick: () -> Unit,
+    textColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurface,
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .padding(horizontal = 24.dp, vertical = 14.dp),
+        verticalArrangement = Arrangement.spacedBy(2.dp)
+    ) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodyLarge,
+            color = textColor,
+            fontWeight = FontWeight.Medium
+        )
+        Text(
+            text = supportingText,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
     }
 }
 
