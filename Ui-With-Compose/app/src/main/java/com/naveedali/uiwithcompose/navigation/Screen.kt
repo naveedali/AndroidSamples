@@ -38,7 +38,7 @@ sealed class Screen(val route: String) {
      object Cards            : Screen("cards")
      object Snackbars        : Screen("snackbars")
      object HorizontalList   : Screen("horizontal_list")
-    // object VerticalList     : Screen("vertical_list")
+     object VerticalList     : Screen("vertical_list")
     // object Grid             : Screen("grid")
     // object LoginPage        : Screen("login_page")
     // object BottomNavigation : Screen("bottom_navigation")

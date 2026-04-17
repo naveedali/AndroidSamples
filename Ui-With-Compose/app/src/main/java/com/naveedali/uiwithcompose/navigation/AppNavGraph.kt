@@ -17,6 +17,7 @@ import com.naveedali.uiwithcompose.screens.RatingBarScreen
 import com.naveedali.uiwithcompose.screens.ScaffoldDemoScreen
 import com.naveedali.uiwithcompose.screens.SnackbarsToastsScreen
 import com.naveedali.uiwithcompose.screens.TextFieldsScreen
+import com.naveedali.uiwithcompose.screens.VerticalListScreen
 
 // ─────────────────────────────────────────────────────────────────────────────
 // AppNavGraph — the navigation map for the whole app.
@@ -66,7 +67,7 @@ fun AppNavGraph(navController: NavHostController) {
                         9  -> navController.navigate(Screen.Cards.route)
                         10 -> navController.navigate(Screen.Snackbars.route)
                         11 -> navController.navigate(Screen.HorizontalList.route)
-                        // 12 -> navController.navigate(Screen.VerticalList.route)
+                        12 -> navController.navigate(Screen.VerticalList.route)
                         // 13 -> navController.navigate(Screen.Grid.route)
                         // 14 -> navController.navigate(Screen.LoginPage.route)
                         // 15 -> navController.navigate(Screen.BottomNavigation.route)
@@ -143,6 +144,13 @@ fun AppNavGraph(navController: NavHostController) {
         // ── Horizontal List screen ──────────────────────────────────────────
         composable(route = Screen.HorizontalList.route) {
             HorizontalListScreen(
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        // ── Vertical List screen ────────────────────────────────────────────
+        composable(route = Screen.VerticalList.route) {
+            VerticalListScreen(
                 onBack = { navController.popBackStack() }
             )
         }
