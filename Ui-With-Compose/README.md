@@ -308,17 +308,6 @@ Material 3 has no built-in `RatingBar` — these demos show how to build one fro
 
 `LazyVerticalGrid`, `LazyHorizontalGrid`, and `GridCells.Adaptive` for responsive column counts.
 
----
-
-### 🔜 Coming Next
-
-| # | Screen | Key components |
-|---|---|---|
-| 15 | Login Page | Form layout combining `TextField`, `Button`, validation |
-| 16 | Bottom Navigation | `NavigationBar`, `NavHost`, back-stack management |
-| 17 | Animations | `AnimatedVisibility`, `animate*AsState`, Transition API |
-
----
 
 ## How to Add a New Screen
 
@@ -435,7 +424,7 @@ val allSelected by remember { derivedStateOf { items.all { it.selected } } }
 
 ```bash
 # Clone
-git clone https://github.com/your-username/ui-with-compose.git
+git clone https://github.com/your-username/AndroidSamples.git and import Ui-With-Compose 
 
 # Open in Android Studio Hedgehog or later
 # Run on an emulator or device (minSdk 24)
